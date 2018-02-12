@@ -24,7 +24,7 @@ var mainState = {
         // Here we set up the game, display sprites, etc.  
         game.physics.startSystem(Phaser.Physics.ARCADE);
         // background color
-        game.stage.backgroundColor = '#697e96';
+        game.stage.backgroundColor = '#2B3D54';
 
         mountainsBack = game.add.tileSprite(0,
             game.height - game.cache.getImage('mountains-back').height+200,
