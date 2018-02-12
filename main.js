@@ -70,7 +70,9 @@ var mainState = {
     update: function() {
         // This function is called 60 times per second    
         // It contains the game's logic 
-
+        if(this.game.input.activePointer.isDown){
+            this.jump();
+        }
         //scroll the background
         mountainsBack.tilePosition.x -= 0.05;
         mountainsMid1.tilePosition.x -= 0.3;
