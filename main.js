@@ -9,16 +9,43 @@ var mainState = {
 
         // load pipes
         game.load.image('pipe', 'assets/pipe.png');
+
+        // load background
+        game.load.image('mountains-back', 'assets/mountains-back.png');
+        game.load.image('mountains-mid1', 'assets/mountains-mid1.png');
+        game.load.image('mountains-mid2', 'assets/mountains-mid2.png');
     },
 
     create: function() { 
         // This function is called after the preload function     
-
+        // score
         this.score = 0;
         this.labelScore = game.add.text(20, 20, "0", { font: "30px Arial", fill: "#ffffff" });   
         // Here we set up the game, display sprites, etc.  
-        game.stage.backgroundColor = '#71c5cf';
         game.physics.startSystem(Phaser.Physics.ARCADE);
+        // background color
+        game.stage.backgroundColor = '#697e96';
+
+        mountainsBack = game.add.tileSprite(0,
+            game.height - game.cache.getImage('mountains-back').height+200,
+            game.width,
+            game.cache.getImage('mountains-back').height,
+            'mountains-back'
+        );
+
+        mountainsMid1 = game.add.tileSprite(0,
+            game.height - game.cache.getImage('mountains-mid1').height+200,
+            game.width,
+            game.cache.getImage('mountains-mid1').height,
+            'mountains-mid1'
+        );
+
+        mountainsMid2 = game.add.tileSprite(0,
+            game.height - game.cache.getImage('mountains-mid2').height+200,
+            game.width,
+            game.cache.getImage('mountains-mid2').height,
+            'mountains-mid2'
+        );
 
         // Display the bird at the position x=100 and y=245
         this.bird = game.add.sprite(100, 245, 'bird');
@@ -44,6 +71,11 @@ var mainState = {
         // This function is called 60 times per second    
         // It contains the game's logic 
 
+        //scroll the background
+        mountainsBack.tilePosition.x -= 0.05;
+        mountainsMid1.tilePosition.x -= 0.3;
+        mountainsMid2.tilePosition.x -= 0.75;
+
         // if bird is out of view restart game
         if(this.bird.y < 0 || this.bird.y > 490) {
             this.restartGame();
@@ -52,6 +84,8 @@ var mainState = {
         game.physics.arcade.overlap(this.bird, this.pipes, this.restartGame, null, this);
 
     },
+
+// extra functions
 
     jump: function(){
         this.bird.body.velocity.y = -350;
